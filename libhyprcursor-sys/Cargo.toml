@@ -9,7 +9,7 @@ repository = "https://github.com/morr0ne/rusty-hyprcursor"
 readme = "README.md"
 
 [dependencies]
-cairo-rs = { version = "0.19.2", default-features = false }
+cairo-sys-rs = "0.19.2"
 
 [build-dependencies]
 pkg-config = "0.3.30"
