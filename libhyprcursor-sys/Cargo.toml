@@ -1,0 +1,15 @@
+[package]
+name = "libhyprcursor-sys"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Federico Maria Morrone <contact@morrone.dev>"]
+description = "Native bindings for libhyprcursor"
+repository = "https://github.com/morr0ne/rusty-hyprcursor"
+readme = "README.md"
+
+[dependencies]
+cairo-rs = { version = "0.19.2", default-features = false }
+
+[build-dependencies]
+pkg-config = "0.3.30"
