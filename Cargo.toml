@@ -16,3 +16,6 @@ libhyprcursor-sys = { path = "libhyprcursor-sys", version = "0.1.0" }
 
 [workspace]
 members = ["libhyprcursor-sys"]
+
+[dev-dependencies]
+cairo-rs = { version = "0.19.2", features = ["png"] }
