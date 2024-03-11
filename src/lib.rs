@@ -53,7 +53,7 @@ impl HyprCursorManager {
         &self,
         shape: &CStr,
         style_info: &CursorStyleInfo,
-    ) -> Vec<CursorImageData> {
+    ) -> &mut [CursorImageData] {
         let mut len: i32 = 0;
 
         let image_data = unsafe {
@@ -63,17 +63,12 @@ impl HyprCursorManager {
                 style_info.inner,
                 &mut len,
             )
+            .cast::<CursorImageData>()
         };
 
-        let image_data = unsafe { slice::from_raw_parts(image_data, len as usize) };
+        let image_data = unsafe { slice::from_raw_parts_mut(image_data, len as usize) };
 
-        let mut data = Vec::with_capacity(len as usize);
-
-        for image in image_data {
-            data.push(unsafe { CursorImageData::from_raw(*image) })
-        }
-
-        data
+        image_data
     }
 }
 

@@ -6,23 +6,42 @@ use libhyprcursor_sys::{
 };
 
 #[derive(Debug, Clone)]
+#[repr(transparent)]
 pub struct CursorImageData {
-    pub surface: Surface,
-    pub size: i32,
-    pub delay: i32,
-    pub hotspot_x: i32,
-    pub hotspot_y: i32,
+    inner: NonNull<SCursorImageData>,
 }
 
 impl CursorImageData {
     pub unsafe fn from_raw(raw: *mut SCursorImageData) -> Self {
         Self {
-            surface: Surface::from_raw_none((*raw).surface),
-            size: (*raw).size,
-            delay: (*raw).delay,
-            hotspot_x: (*raw).hotspotX,
-            hotspot_y: (*raw).hotspotY,
+            inner: NonNull::new_unchecked(raw),
         }
+    }
+
+    pub fn surface(&self) -> Surface {
+        unsafe { Surface::from_raw_none(self.inner.as_ref().surface) }
+    }
+
+    pub fn size(&self) -> i32 {
+        unsafe { self.inner.as_ref().size }
+    }
+
+    pub fn delay(&self) -> i32 {
+        unsafe { self.inner.as_ref().delay }
+    }
+
+    pub fn hotspot_x(&self) -> i32 {
+        unsafe { self.inner.as_ref().hotspotX }
+    }
+
+    pub fn hotspot_y(&self) -> i32 {
+        unsafe { self.inner.as_ref().hotspotY }
+    }
+}
+
+impl Drop for CursorImageData {
+    fn drop(&mut self) {
+        // FIXME
     }
 }
 
