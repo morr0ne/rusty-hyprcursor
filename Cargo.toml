@@ -6,6 +6,7 @@ license = "Apache-2.0"
 authors = ["Federico Maria Morrone <contact@morrone.dev>"]
 description = "Rust bindings for hyprcursor"
 repository = "https://github.com/morr0ne/rusty-hyprcursor"
+include = ["src/**/*.rs", "README.md", "LICENSE"]
 readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
